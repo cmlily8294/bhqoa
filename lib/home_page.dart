@@ -1,10 +1,10 @@
 import 'package:bhqoa/common/route/base_state.dart';
-import 'package:bhqoa/job/view/job.dart';
-import 'package:bhqoa/me/view/me.dart';
+import 'package:bhqoa/pages/job/view/job.dart';
+import 'package:bhqoa/pages/me/view/me.dart';
 import 'package:bhqoa/resources/app_icons.dart';
 import 'package:bhqoa/resources/styles.dart';
-import 'package:bhqoa/task/view/task.dart';
-import 'package:bhqoa/todo/view/todo.dart';
+import 'package:bhqoa/pages/task/view/task.dart';
+import 'package:bhqoa/pages/todo/view/todo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bhqoa/resources/strings.dart';
