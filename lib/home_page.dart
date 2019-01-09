@@ -71,23 +71,23 @@ class _HomePageState extends BaseState<HomePage> {
   Icon getTabIcon(int currentIdx) {
     if (currentIdx == _currentIndex) {
       return Icon(_tabImages[currentIdx],
-          size: 30.0, color: AppColors.blue_A1A7B3);
+          size: 30.0, color: AppColors.blue_5276b2);
     }
     return Icon(_tabImages[currentIdx],
-        size: 30.0, color: AppColors.gray_AC4_A1A7B3);
+        size: 30.0, color: AppColors.gray_A1A7B3);
   }
   Text getTabTitle(int currentIdx) {
     if (currentIdx == _currentIndex) {
       return Text(
         _appBarTitles[currentIdx],
         style: TextStyle(
-            color: AppColors.blue_A1A7B3, fontSize: AppFonts.font20),
+            color: AppColors.blue_5276b2, fontSize: AppFonts.font20),
       );
     }
     return Text(
       _appBarTitles[currentIdx],
       style: TextStyle(
-          color: AppColors.gray_AC4_A1A7B3, fontSize: AppFonts.font20),
+          color: AppColors.gray_A1A7B3, fontSize: AppFonts.font20),
     );
   }
 

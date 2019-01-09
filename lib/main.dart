@@ -1,4 +1,5 @@
 import 'package:bhqoa/common/route/route_manager.dart';
+import 'package:bhqoa/resources/styles.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primaryColor: AppColors.blue_5276b2
       ),
-      initialRoute: RouteManager.MAIN,
+      initialRoute: RouteManager.LOGIN,
       onGenerateRoute: routeSettings,
       navigatorObservers: RouteManager.init()
     );

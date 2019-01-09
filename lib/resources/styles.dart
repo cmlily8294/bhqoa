@@ -5,11 +5,11 @@ import 'dart:ui';
 class AppColors {
   static const page_background_color = Color(0xFFF3F3F3);
 
-  static const gray_AC1_F8F8F8 = Color(0xFFF8F8F8);
-  static const red_AC2_F05D3B = Color(0xFFF05D3B);
-  static const blue_A1A7B3 = Color(0xFF5276b2);
-  static const gray_AC3_4A4A4A = Color(0xFF4A4A4A);
-  static const gray_AC4_A1A7B3 = Color(0xFFA1A7B3);
+  static const gray_F8F8F8 = Color(0xFFF8F8F8);
+  static const red_F05D3B = Color(0xFFF05D3B);
+  static const blue_5276b2 = Color(0xFF5276b2);
+  static const gray_4A4A4A = Color(0xFF4A4A4A);
+  static const gray_A1A7B3 = Color(0xFFA1A7B3);
 
 }
 
@@ -27,4 +27,5 @@ class AppFonts {
   static const font19 = 19.0;
   static const font20 = 20.0;
   static const font22 = 22.0;
+  static const font40 = 40.0;
 }

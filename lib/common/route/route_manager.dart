@@ -1,3 +1,4 @@
+import 'package:bhqoa/pages/login/view/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bhqoa/home_page.dart';
 
@@ -10,6 +11,9 @@ Route<dynamic> routeSettings(RouteSettings settings) {
   switch (uri.pathSegments[0]) {
     case 'main':
       route = router(HomePage());
+      break;
+    case 'login':
+      route = router(LoginPage());
       break;
     default:
       return null;
