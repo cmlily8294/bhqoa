@@ -20,6 +20,7 @@ class _LoginPageState extends BaseState<LoginPage> {
 
   @override
   initState() {
+    super.initState();
     _controllerUsername = TextEditingController();
     _controllerPassword = TextEditingController();
   }

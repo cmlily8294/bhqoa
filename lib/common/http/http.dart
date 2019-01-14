@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Http {
-  String baseUrl = "http://127.0.0.1:81";
+  String baseUrl = "http://47.95.220.20:81/bhqoa";
   Dio dio;
   Options options;
 
@@ -25,6 +26,13 @@ class Http {
       receiveTimeout: 3000,
     );
     dio = new Dio(options);
+    dio.interceptor.request.onSend = (Options options) async{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String jwt = prefs.getString('jwt');
+      if (jwt != null && jwt.isNotEmpty) {
+        options.headers['jwt'] = jwt;
+      }
+    };
   }
 
   get(url, {data, options, cancelToken}) async {

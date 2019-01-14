@@ -1,8 +1,13 @@
 import 'package:bhqoa/common/route/route_manager.dart';
+import 'package:bhqoa/common/security/securityData.dart';
 import 'package:bhqoa/resources/styles.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  var userInfo = await SecurityData().getUserInfo();
+  print(userInfo);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
