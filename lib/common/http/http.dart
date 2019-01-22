@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Http {
-  String baseUrl = "http://47.95.220.20:81/bhqoa";
+  String baseUrl = "http://47.95.220.20:81";
   Dio dio;
   Options options;
 
@@ -26,12 +26,13 @@ class Http {
       receiveTimeout: 3000,
     );
     dio = new Dio(options);
-    dio.interceptor.request.onSend = (Options options) async{
+    dio.interceptor.request.onSend = (Options opts) async{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String jwt = prefs.getString('jwt');
       if (jwt != null && jwt.isNotEmpty) {
-        options.headers['jwt'] = jwt;
+        opts.headers['jwt'] = jwt;
       }
+      return opts;
     };
   }
 
@@ -55,7 +56,7 @@ class Http {
   }
 
   post(url, {data, options, cancelToken}) async {
-    print('post请求启动! url：$url ,body: $data');
+    print('post请求启动! url：$url ,data: $data');
     Response response;
     try {
       response = await dio.post(
@@ -69,6 +70,25 @@ class Http {
         print('post请求取消! ' + e.message);
       }
       print('post请求发生错误：$e');
+    }
+    return response.data;
+  }
+
+  delete(url, {data, options, cancelToken}) async {
+    print('delete启动! url：$url ,data: $data');
+    Response response;
+    try {
+      response = await dio.delete(
+        url,
+        data: data,
+        cancelToken: cancelToken,
+      );
+      print('delete成功!response.data：${response.data}');
+    } on DioError catch (e) {
+      if (CancelToken.isCancel(e)) {
+        print('delete取消! ' + e.message);
+      }
+      print('delete发生错误：$e');
     }
     return response.data;
   }
