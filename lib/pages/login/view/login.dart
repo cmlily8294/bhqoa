@@ -1,5 +1,6 @@
 import 'package:bhqoa/common/route/base_state.dart';
 import 'package:bhqoa/common/route/route_manager.dart';
+import 'package:bhqoa/common/security/securityService.dart';
 import 'package:bhqoa/resources/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,7 +30,12 @@ class _LoginPageState extends BaseState<LoginPage> {
     final form = formKey.currentState;
     if (form.validate()) {
       form.save();
-      RouteManager.route(context, RouteManager.MAIN);
+      SecurityService securityService = SecurityService();
+      securityService.login(_username, _password).then((resp) {
+        if (securityService.user != null) {
+          RouteManager.route(context, RouteManager.MAIN);
+        }
+      });
     }
   }
 

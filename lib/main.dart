@@ -1,12 +1,13 @@
 import 'package:bhqoa/common/route/route_manager.dart';
-import 'package:bhqoa/common/security/securityData.dart';
+import 'package:bhqoa/common/security/securityService.dart';
 import 'package:bhqoa/resources/styles.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
-  var userInfo = await SecurityData().getUserInfo();
-  print(userInfo);
-  runApp(MyApp());
+void main() {
+  SecurityService securityService= SecurityService();
+  securityService.getUserInfo().then((resp) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primaryColor: AppColors.blue_5276b2
       ),
-      initialRoute: RouteManager.LOGIN,
+      initialRoute: SecurityService().user != null ? RouteManager.MAIN : RouteManager.LOGIN,
       onGenerateRoute: routeSettings,
       navigatorObservers: RouteManager.init()
     );

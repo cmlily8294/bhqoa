@@ -1,22 +1,29 @@
+import 'package:bhqoa/common/http/api.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Http {
-  String baseUrl = "http://47.95.220.20:81";
   Dio dio;
   Options options;
 
-  static Http instance;
+  // 工厂模式 创建单例
+  factory Http() => _getInstance();
 
-  static Http getInstance() {
-    if (instance == null) {
-      instance = new Http();
+  static Http get instance => _getInstance();
+  static Http _instance;
+
+  static Http _getInstance() {
+    if (_instance == null) {
+      _instance = new Http._init();
     }
-    return instance;
+    return _instance;
   }
 
-  Http() {
+
+  Http._init() {
+    Map headers = Map<String, dynamic>();
+    headers['Origin'] = 'http://localhost:8100'; // todo 端上的接口不应该有这个跨域限制
     options = Options(
-      baseUrl: baseUrl,
+      baseUrl: API.baseUrl,
       //连接服务器超时时间，单位是毫秒.
       connectTimeout: 10000,
 
@@ -24,6 +31,7 @@ class Http {
       ///  [Dio] 将会抛出一个[DioErrorType.RECEIVE_TIMEOUT]的异常.
       ///  注意: 这并不是接收数据的总时限.
       receiveTimeout: 3000,
+      headers: headers,
     );
     dio = new Dio(options);
     dio.interceptor.request.onSend = (Options opts) async{
@@ -43,6 +51,7 @@ class Http {
       response = await dio.get(
         url,
         data: data,
+        options: options,
         cancelToken: cancelToken,
       );
       print('get请求成功!response.data：${response.data}');
@@ -52,7 +61,7 @@ class Http {
       }
       print('get请求发生错误：$e');
     }
-    return response.data;
+    return response.data??null;
   }
 
   post(url, {data, options, cancelToken}) async {
@@ -62,6 +71,7 @@ class Http {
       response = await dio.post(
         url,
         data: data,
+        options: options,
         cancelToken: cancelToken,
       );
       print('post请求成功!response.data：${response.data}');
@@ -71,7 +81,7 @@ class Http {
       }
       print('post请求发生错误：$e');
     }
-    return response.data;
+    return response.data??null;
   }
 
   delete(url, {data, options, cancelToken}) async {
@@ -81,6 +91,7 @@ class Http {
       response = await dio.delete(
         url,
         data: data,
+        options: options,
         cancelToken: cancelToken,
       );
       print('delete成功!response.data：${response.data}');
@@ -90,7 +101,7 @@ class Http {
       }
       print('delete发生错误：$e');
     }
-    return response.data;
+    return response.data??null;
   }
 
 }
